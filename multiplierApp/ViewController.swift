@@ -9,17 +9,64 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    
+    var mulitplier = 0
+    var maxMultiplier = 50
+    var result = 0
+    
+    
+    @IBOutlet weak var multiplierLogo: UIImageView!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var playButton: UIButton!
+    
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var addButton: UIButton!
+    
+    @IBAction func addButtonPressed(sender: UIButton!) {
+        multiplyNumber()
+        updateLabel()
+        if restartMultiplier() {
+            multiplierLogo.hidden = false
+            textField.hidden = false
+            playButton.hidden = false
+            
+            textLabel.hidden = true
+            addButton.hidden = true
+            textField.text = ""
+            textLabel.text = "Press Add to Add"
+            result = 0
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func playButtonPressed(sender: UIButton) {
+        if textField.text != nil && textField.text != "" {
+        multiplierLogo.hidden = true
+        textField.hidden = true
+        playButton.hidden = true
+        
+        textLabel.hidden = false
+        addButton.hidden = false
+            mulitplier = Int(textField.text!)!
+        }
+        
+            
     }
-
+    func multiplyNumber() {
+       result = result + mulitplier
+    }
+    func updateLabel() {
+        textLabel.text = "\(result) = \(result-mulitplier) + \(mulitplier)"
+    }
+   
+    
+    func restartMultiplier() -> Bool {
+        if result >= maxMultiplier {
+            return true
+            
+        }else{
+            return false
+        }
 
 }
 
+}
